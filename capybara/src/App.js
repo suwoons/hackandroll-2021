@@ -28,8 +28,7 @@ const App = () => {
     if (!alive) {
       togglePause(true);
       if (!alert("Game Over")) {
-        setScore(0);
-        toggleLife(true);
+        resetGame();
       }
     }
   }, [alive]);
@@ -51,6 +50,7 @@ const App = () => {
     if (key === " ") {
       if (isPause) {
         togglePause(false);
+        resetGame();
       }
       playerJump();
 
@@ -70,6 +70,11 @@ const App = () => {
     }
   };
 
+  const resetGame = () => {
+    setScore(0);
+    toggleLife(true);
+  }
+
   const playerJump = () => {
     toggleJump(true);
   };
@@ -85,13 +90,14 @@ const App = () => {
     // detect collision
     if (cactusLeft >= 0 && cactusLeft <= 50 && playerTop >= 130) {
       toggleLife(false);
+      console.log(playerRef.current.className);
     }
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
       checkAlive();
-    }, 5);
+    }, 10);
     return () => clearInterval(interval);
   });
 
@@ -127,8 +133,12 @@ const App = () => {
       <div id="cactus"
         className={
           isPause ? "pause" : "cactus-animated"
-        }></div>
+        }
+      ></div>
       
+      <div id="description">
+        {`This is T-rex's friend, Capybara.`}
+      </div>
     </div>
   );
 }
