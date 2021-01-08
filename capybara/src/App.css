@@ -17,29 +17,28 @@
   top: 150px;
 }
 
+.player-pause {
+  background-image: url(capybara_neutral.png);
+  width: 50px;
+  height: 50px;
+  background-size: 50px 50px;
+  left: 0px;
+}
+
 #cactus {
-  width: 20px;
+  width: 40px;
   height: 40px;
   position: relative;
   top: 107px;
   left: 580px;
 
-  background-image: url(cactus.png);
-  background-size: 20px 40px;
-
-  animation: block 1s infinite linear;
+  background-image: url(cactus1.png);
+  background-size: 40px 40px;
 }
 
-/* #ground {
-  width: 600px;
-  height: 250px;
-  position: relative;
-
-  background-image: url(ground.png);
-  background-size: 600px 250px;
-
-  animation: floor 1s infinite ;
-} */
+.cactus-animated {
+  animation: block 1s infinite linear;
+}
 
 #cloud {
   width: 80px;
@@ -50,7 +49,9 @@
 
   background-image: url(cloud.png);
   background-size: 80px 50px;
+}
 
+.cloud-animated {
   animation: breeze 10s infinite linear;
 }
 
@@ -64,6 +65,23 @@
   padding: 10px;
   font-family: arcadeFont, Tahoma, sans-serif;
   font-weight: bold;
+}
+
+#startMessage {
+  padding: 150px;
+  font-family: arcadeFont, Tahoma, sans-serif;
+  font-size: 2em;
+  text-align: center;
+  position: absolute;
+}
+
+#description {
+  padding-top: 150px;
+  padding-left: 175px;
+  font-family: arcadeFont, Tahoma, sans-serif;
+  font-size: 17px;
+  text-align: center;
+  position: absolute;
 }
 
 .jump {

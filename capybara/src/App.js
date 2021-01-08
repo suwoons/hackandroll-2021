@@ -6,6 +6,7 @@ import boop from "./jump.mp3";
 const App = () => {
   const [jumping, toggleJump] = useState(false);
   const [alive, toggleLife] = useState(true);
+  const [isPause, togglePause] = useState(true);
   const [score, setScore] = useState(0);
   const [highscore, setHighScore] = useState(0);
   const playerRef = useRef();
@@ -20,17 +21,14 @@ const App = () => {
 
   useEffect(() => {
     toggleLife(true);
+    togglePause(true);
   }, []);
 
   useEffect(() => {
     if (!alive) {
-      if (score > highscore) {
-        // set high score
-        setHighScore(score);
-      }
+      togglePause(true);
       if (!alert("Game Over")) {
-        setScore(0);
-        toggleLife(true);
+        resetGame();
       }
     }
   }, [alive]);
@@ -50,6 +48,10 @@ const App = () => {
     const { key } = e;
     // jump when SPACEBAR is pressed
     if (key === " ") {
+      if (isPause) {
+        togglePause(false);
+        resetGame();
+      }
       playerJump();
 
       // get obstacle x position
@@ -60,9 +62,18 @@ const App = () => {
         // add point when successfully clearing a cactus
         let newScore = score + 1;
         setScore(newScore);
+        if (newScore > highscore) {
+          // set high score
+          setHighScore(newScore);
+        }
       }
     }
   };
+
+  const resetGame = () => {
+    setScore(0);
+    toggleLife(true);
+  }
 
   const playerJump = () => {
     toggleJump(true);
@@ -79,6 +90,7 @@ const App = () => {
     // detect collision
     if (cactusLeft >= 0 && cactusLeft <= 50 && playerTop >= 130) {
       toggleLife(false);
+      console.log(playerRef.current.className);
     }
   };
 
@@ -101,18 +113,32 @@ const App = () => {
       <div id="scoreboard" style={{ paddingRight: "15px" }}>
         {`HI  ${highscorePadded}`}
       </div>
-      <div id="cloud"></div>
+      {isPause ? 
+        <div id="startMessage">{`Press  SPACE  to Start`}</div>
+        : <></>}
+      <div id="cloud"
+        className={
+          isPause ? "pause" : "cloud-animated"
+        }></div>
       <div id="ground"></div>
       <div id="player"
         className={
-          alive ?
+          isPause ? "player-pause"
+          : alive ?
             jumping ? "jump" : "walk"
           : "dead"
         }
         ref={playerRef}
       ></div>
-      <div id="cactus"></div>
+      <div id="cactus"
+        className={
+          isPause ? "pause" : "cactus-animated"
+        }
+      ></div>
       
+      <div id="description">
+        {`This is T-rex's friend, Capybara.`}
+      </div>
     </div>
   );
 }
