@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "Capybara Game",
+  "version": "1.0",
+  "description": "Capybara takes over!",
   "icons": [
     {
       "src": "favicon.ico",
@@ -23,3 +24,5 @@
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }
+
+

@@ -1,10 +1,12 @@
 .game {
   width: 600px;
   height: 250px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   overflow: hidden;
   margin: auto;
-  top: 150px;
+
+  background-size: 600px 265px;
+  background-image: url(ground.png);
 }
 
 #player {
@@ -13,15 +15,13 @@
   background-size: 50px 50px;
   position: relative;
   top: 150px;
-  
-  
 }
 
 #cactus {
   width: 20px;
   height: 40px;
   position: relative;
-  top: 110px;
+  top: 107px;
   left: 580px;
 
   background-image: url(cactus.png);
@@ -29,6 +29,17 @@
 
   animation: block 1s infinite linear;
 }
+
+/* #ground {
+  width: 600px;
+  height: 250px;
+  position: relative;
+
+  background-image: url(ground.png);
+  background-size: 600px 250px;
+
+  animation: floor 1s infinite ;
+} */
 
 #cloud {
   width: 80px;
@@ -43,6 +54,18 @@
   animation: breeze 10s infinite linear;
 }
 
+@font-face {
+  font-family: arcadeFont;
+  src: url(ARCADECLASSIC.TTF);
+}
+
+#scoreboard {
+  float: right;
+  padding: 10px;
+  font-family: arcadeFont, Tahoma, sans-serif;
+  font-weight: bold;
+}
+
 .jump {
   background-image: url(capybara_jump.png);
   animation: jump 0.5s linear;
@@ -50,6 +73,20 @@
 
 .walk {
   animation: capybaraWalk 0.09s infinite alternate;
+}
+
+.dead {
+  background-image: url(capybara_dead.png);
+}
+
+@keyframes floor {
+  0%, 100% {
+    left: 0px;
+  }
+
+  50% {
+    left: 200px;
+  }
 }
 
 @keyframes capybaraWalk {
