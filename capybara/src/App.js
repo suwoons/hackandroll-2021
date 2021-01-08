@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
+// import capybaraNeutral from "./capybara_neutral.png";
 
 const App = () => {
   const [jumping, toggleJump] = useState(false);
@@ -66,13 +67,33 @@ const App = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     animatePlayer();
+  //   }, 90);
+  //   return () => clearInterval(interval);
+  // }, []);
+
+
+  // if (!alive) {
+  //   return (
+  //   <div className="game">
+  //     <div id="game-over"></div>
+  //     <div id="cactus"></div>
+  //   </div>
+  //   );
+  // }
+  // let avatar = { backgroundImage: capybaraNeutral };
+
   return (
     <div className="game">
+      <div id="cloud"></div>
       <div id="player"
         className={
-          jumping ? "jump" : ""
+          jumping ? "jump" : "walk"
         }
-        ref={playerRef}></div>
+        ref={playerRef}
+      ></div>
       <div id="cactus"></div>
     </div>
   );
