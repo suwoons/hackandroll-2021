@@ -8,11 +8,20 @@ const App = () => {
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
-
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   });
+
+  useEffect(() => {
+    toggleLife(true);
+  }, []);
+
+  useEffect(() => {
+    if (!alive) {
+      alert("Game Over");
+    }
+  }, [alive]);
 
   useEffect(() => {
     if (jumping) {
@@ -36,8 +45,18 @@ const App = () => {
   };
 
   const checkAlive = () => {
-    // console.log(parseInt(window.getComputedStyle(playerRef).getPropertyValue("top")));
-    console.log(playerRef.offsetTop);
+    // get player y position
+    let playerTop = parseInt(window.getComputedStyle(playerRef.current).getPropertyValue("top"));
+
+    // get obstacle x position
+    const cactus = document.getElementById("cactus");
+    let cactusLeft = parseInt(window.getComputedStyle(cactus).getPropertyValue("left"));
+
+    // detect collision
+    if (cactusLeft > 0 && cactusLeft < 50 && playerTop >= 140) {
+      console.log("collision");
+      toggleLife(false);
+    }
   };
 
   useEffect(() => {
